@@ -1,0 +1,7 @@
+# Sandbox (snbx) overrides for Grafana.
+# The shared config (Prometheus datasource, etc.) lives in base.values.yaml; this file only
+# carries sandbox-specific deltas. Keep it thin.
+#
+# Ingress is disabled in base.values.yaml; expose via port-forward or add an Istio/ingress host
+# here when sandbox external access is needed.
+replicas: 1

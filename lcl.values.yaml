@@ -1,0 +1,14 @@
+# Local (lcl) overrides for Grafana.
+# The shared config (Prometheus datasource, etc.) lives in base.values.yaml; this file only
+# carries local-specific deltas. Keep it thin.
+#
+# Access locally: kubectl -n grafana port-forward svc/grafana 3000:80  → http://localhost:3000
+# Admin password (chart auto-generated until secret management lands):
+#   kubectl get secret grafana -n grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+replicas: 1
+
+# Local Keycloak uses self-signed certs → skip TLS verification on the OAuth backchannel calls
+# (mirrors kiali's insecure_skip_verify_tls). Deep-merges into base.values.yaml's grafana.ini.
+grafana.ini:
+  auth.generic_oauth:
+    tls_skip_verify_insecure: true
